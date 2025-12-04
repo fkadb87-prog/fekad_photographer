@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>פקדו - שירותי צילום יוקרתיים ודינמיים</title>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        /* --- פילוסופיית עיצוב: יוקרה, מרחב, ותנועה --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Assistant', sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #f7f7f7;
+            text-align: right;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* פלטת צבעים - זהב מעושן + הובר ויברנטי */
+        :root {
+            --color-primary: #1a1a1a;
+            --color-secondary: #f7f7f7;
+            --color-accent: #b8860b; /* זהב מעושן */
+            --color-hover: #ffad33; /* כתום-זהב בהיר לאפקטי הובר */
+            --color-shadow: rgba(184, 134, 11, 0.5); /* צל זהב אנרגטי */
+        }
+
+        /* 1. Header and Navigation - דינמיות */
+        header {
+            background-color: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+            padding: 18px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            transition: background-color 0.4s, box-shadow 0.4s;
+        }
+
+        header .logo {
+            font-size: 2.1em;
+            font-weight: 800;
+            color: var(--color-primary);
+            letter-spacing: 1px;
+            text-decoration: none;
+        }
+
+        nav a {
+            color: var(--color-primary);
+            text-decoration: none;
+            margin-right: 30px;
+            font-weight: 400;
+            font-size: 1.1em;
+            position: relative;
+            transition: color 0.3s ease-in-out, transform 0.2s ease-out; 
+        }
+
+        nav a:hover {
+            color: var(--color-hover);
+            transform: translateY(-2px); /* קפיצה קטנה */
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            right: 0;
+            width: 0;
+            height: 3px;
+            background-color: var(--color-accent);
+            transition: width 0.3s ease-in-out; /* הקו מתמתח */
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        /* 2. Hero Section */
+        .hero {
+            position: relative;
+            height: 90vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+            margin-top: 70px;
+        }
+        
+        .hero-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-background img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+        }
+
+        .hero-background img.active {
+            opacity: 1;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 3;
+            color: #fff;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 4.5em;
+            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .hero p {
+            font-size: 1.6em;
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--color-accent);
+            color: #fff;
+            padding: 15px 45px;
+            text-decoration: none;
+            border-radius: 2px;
+            font-weight: 700;
+            font-size: 1.1em;
+            border: 1px solid var(--color-accent);
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s, filter 0.3s;
+        }
+
+        .cta-button:hover {
+            background-color: var(--color-hover);
+            transform: translateY(-5px); /* קפיצה בולטת */
+            box-shadow: 0 10px 20px var(--color-shadow);
+            filter: brightness(1.1);
+        }
+
+        /* 3. Global Sections */
+        section {
+            padding: 120px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 3.5em;
+            margin-bottom: 70px;
+            font-weight: 700;
+            color: var(--color-primary);
+            text-align: center;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--color-accent);
+            margin: 15px auto 0;
+            transition: width 0.4s ease-in-out; /* הקו מתרחב בהובר */
+        }
+        
+        .section-title:hover::after {
+            width: 100px; 
+        }
+
+        /* 4. Gallery - 3 per row + Vibe effects */
+        .gallery-category {
+            margin-bottom: 80px;
+            padding-bottom: 40px;
+        }
+
+        .category-title {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: 35px;
+            border-right: 4px solid var(--color-accent);
+            padding-right: 18px;
+            display: inline-block;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            cursor: pointer;
+            position: relative;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-radius: 0;
+            /* שינוי זה לשליטה ב-JS */
+            opacity: 0;
+            transform: translateY(20px); 
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out, filter 0.4s;
+        }
+        
+        /* אנימציית הטעינה */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gallery-item.loaded {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05); /* גדילה משמעותית */
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            z-index: 10;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease-out, filter 0.5s; 
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.03); 
+            filter: brightness(1.05);
+        }
+        
+        /* 5. Lightbox (Modal) */
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.95);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        .lightbox-content {
+            position: relative;
+            max-width: 70%;
+            max-height: 80vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .lightbox-content img {
+            width: auto;
+            max-width: 100%;
+            height: auto;
+            max-height: 100%;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #f7f7f7;
+            font-size: 3em;
+            cursor: pointer;
+            padding: 15px;
+            opacity: 0.8;
+            transition: opacity 0.2s, color 0.2s;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 1), 0 0 20px var(--color-accent);
+        }
+
+        .lightbox-nav:hover {
+            opacity: 1;
+            color: var(--color-hover);
+        }
+
+        .nav-prev { right: 10px; }
+        .nav-next { left: 10px; }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #f7f7f7;
+            font-size: 3em;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.2s, color 0.3s;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-close:hover {
+            opacity: 1;
+            color: var(--color-accent);
+        }
+        
+        /* 6. Media Queries */
+        @media (max-width: 992px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 768px) {
+            header { padding: 15px 20px; }
+            nav { display: none; }
+            section { padding: 80px 20px; }
+            .hero h1 { font-size: 3em; }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#hero" class="logo">פקדו - צילום</a>
+        <nav>
+            <a href="#gallery">גלריה</a>
+            <a href="#packages">חבילות</a>
+            <a href="#about">אודות</a>
+            <a href="#contact">יצירת קשר</a>
+        </nav>
+    </header>
+
+    <div id="hero" class="hero">
+        <div class="hero-background">
+            <img src="https://picsum.photos/id/163/1600/1000" alt="צילום אירוע שמח" class="active">
+            <img src="https://picsum.photos/id/257/1600/1000" alt="צילום משפחה מחייך">
+            <img src="https://picsum.photos/id/23/1600/1000" alt="צילום עסקי דינמי">
+        </div>
+        <div class="hero-content">
+            <h1>תיעוד יוקרתי של הרגעים החשובים ביותר בחייכם</h1>
+            <p>אומנות, רגש ואיכות בלתי מתפשרת בכל פריים.</p>
+            <a href="#contact" class="cta-button">צרו קשר עכשיו</a>
+        </div>
+    </div>
+
+    <div id="lightboxOverlay" class="lightbox-overlay">
+        <span class="lightbox-close" onclick="closeLightbox()"><i class="fas fa-times"></i></span>
+        <span class="lightbox-nav nav-prev" onclick="changeImage(-1)"><i class="fas fa-chevron-right"></i></span>
+        <div class="lightbox-content">
+            <img id="lightboxImage" src="" alt="תמונה מוגדלת">
+        </div>
+        <span class="lightbox-nav nav-next" onclick="changeImage(1)"><i class="fas fa-chevron-left"></i></span>
+    </div>
+
+    <section id="gallery">
+        <h2 class="section-title">תיק העבודות שלנו</h2>
+        
+        <div class="gallery-category">
+            <h3 class="category-title">💍 חתונות ואירועים</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(0)"><img src="https://picsum.photos/id/10/800/600" data-index="0" alt="חתונה 1"></div>
+                <div class="gallery-item" onclick="openLightbox(1)"><img src="https://picsum.photos/id/15/800/600" data-index="1" alt="חתונה 2"></div>
+                <div class="gallery-item" onclick="openLightbox(2)"><img src="https://picsum.photos/id/16/800/600" data-index="2" alt="חתונה 3"></div>
+                <div class="gallery-item" onclick="openLightbox(3)"><img src="https://picsum.photos/id/21/800/600" data-index="3" alt="חתונה 4"></div>
+                <div class="gallery-item" onclick="openLightbox(4)"><img src="https://picsum.photos/id/25/800/600" data-index="4" alt="חתונה 5"></div>
+                <div class="gallery-item" onclick="openLightbox(5)"><img src="https://picsum.photos/id/35/800/600" data-index="5" alt="חתונה 6"></div>
+            </div>
+        </div>
+
+        <div class="gallery-category">
+            <h3 class="category-title">👨‍👩‍👧‍👦 משפחה וילדים</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(6)"><img src="https://picsum.photos/id/40/800/600" data-index="6" alt="משפחה 1"></div>
+                <div class="gallery-item" onclick="openLightbox(7)"><img src="https://picsum.photos/id/45/800/600" data-index="7" alt="משפחה 2"></div>
+                <div class="gallery-item" onclick="openLightbox(8)"><img src="https://picsum.photos/id/50/800/600" data-index="8" alt="משפחה 3"></div>
+            </div>
+        </div>
+        
+        <div class="gallery-category">
+            <h3 class="category-title">💼 תדמית ועסקים</h3>
+            <div class="gallery-grid">
+                <div class="gallery-item" onclick="openLightbox(9)"><img src="https://picsum.photos/id/56/800/600" data-index="9" alt="עסקי 1"></div>
+                <div class="gallery-item" onclick="openLightbox(10)"><img src="https://picsum.photos/id/57/800/600" data-index="10" alt="עסקי 2"></div>
+                <div class="gallery-item" onclick="openLightbox(11)"><img src="https://picsum.photos/id/58/800/600" data-index="11" alt="עסקי 3"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="packages" style="background-color: #fff;">
+        <h2 class="section-title">חבילות הצילום שלנו</h2>
+        <div style="display: flex; justify-content: center; gap: 40px; margin-top: 40px; flex-wrap: wrap;">
+            
+            <div style="background-color: #f7f7f7; border-radius: 5px; padding: 35px; width: 350px; text-align: right; box-shadow: 0 10px 20px rgba(0,0,0,0.05); border-top: 4px solid var(--color-accent);">
+                <h3 style="font-size: 2.2em; color: var(--color-accent); margin-bottom: 15px; font-weight: 700;">חבילת כסף</h3>
+                <p style="font-weight: 400; margin-bottom: 25px; min-height: 40px;">צילום בסיסי לאירוע קטן או סשן פורטרטים.</p>
+                <ul style="list-style: none; padding-right: 0; margin-bottom: 30px; font-size: 1.1em; line-height: 2.2;">
+                    <li>✓ עד 4 שעות עבודה</li>
+                    <li>✓ צלם סטילס אחד</li>
+                    <li>✓ 200 תמונות ערוכות ב-High Resolution</li>
+                </ul>
+                <a href="#contact" class="cta-button" style="background-color: var(--color-primary); border-color: var(--color-primary);">קבלו הצעה</a>
+            </div>
+
+            <div style="background-color: var(--color-primary); color: #fff; border-radius: 5px; padding: 35px; width: 350px; text-align: right; box-shadow: 0 10px 30px rgba(0,0,0,0.2);">
+                <h3 style="font-size: 2.5em; margin-bottom: 15px; font-weight: 800; color: var(--color-accent);">חבילת זהב (יוקרה)</h3>
+                <p style="font-weight: 400; margin-bottom: 25px; min-height: 40px;">הפתרון המלא לאירועים הגדולים ולפרויקטים עסקיים מקיפים.</p>
+                <ul style="list-style: none; padding-right: 0; margin-bottom: 30px; font-size: 1.1em; line-height: 2.2;">
+                    <li>✓ צילום מלא ליום שלם (10 שעות)</li>
+                    <li>✓ 2 צלמים (סטילס + וידאו)</li>
+                    <li>✓ אלבום כרוך יוקרתי</li>
+                    <li>✓ גלריה פרטית עם אפשרות הדפסה</li>
+                </ul>
+                <a href="#contact" class="cta-button" style="background-color: var(--color-accent); border-color: var(--color-accent);">בואו נתחיל ליצור!</a>
+            </div>
+            
+        </div>
+    </section>
+
+    <section id="about" style="background-color: #ececec;">
+        <h2 class="section-title">הפילוסופיה שלנו</h2>
+        <div class="about-content">
+            <img src="https://picsum.photos/id/83/400/400" alt="תמונה אישית של הצלם">
+            <div class="about-text">
+                <h3>היי, אנחנו פקדו.</h3>
+                <p style="font-size: 1.1em;">אנו סטודיו לצילום בוטיק, המוקדש ליצירת תמונות שאינן רק יפות, אלא גם בעלות עומק סיפורי ורגשי. אנחנו מאמינים בשימוש בטכנולוגיה המתקדמת ביותר, בשילוב עם תשומת לב אישית לכל לקוח. המטרה שלנו היא לתפוס את האותנטיות שלכם ולהפוך אותה לזיכרון נצחי, באיכות שרואים בכל פרט.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" style="background-color: #fff;">
+        <h2 class="section-title">דברו איתנו - מתחילים לתעד</h2>
+        <p style="text-align: center; margin-bottom: 30px;">ספרו לנו על החזון שלכם. אנו מחכים לשמוע.</p>
+        <form style="max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 20px;">
+            <input type="text" placeholder="שם מלא *" required style="padding: 15px; border: 1px solid #ddd; border-radius: 2px; font-size: 1em; direction: rtl;">
+            <input type="email" placeholder="דואר אלקטרוני *" required style="padding: 15px; border: 1px solid #ddd; border-radius: 2px; font-size: 1em; direction: rtl;">
+            <input type="tel" placeholder="טלפון *" required style="padding: 15px; border: 1px solid #ddd; border-radius: 2px; font-size: 1em; direction: rtl;">
+            <textarea placeholder="ספרו לנו על הפרויקט (תאריך, מיקום, סוג צילום)" rows="5" required style="padding: 15px; border: 1px solid #ddd; border-radius: 2px; font-size: 1em; direction: rtl;"></textarea>
+            <button type="submit" class="cta-button" style="border: none; background-color: var(--color-accent); color: #fff; padding: 18px 0;">שלח פנייה</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 פקדו שירותי צילום | אומנות הצילום היוקרתית | טלפון: 05X-XXXXXXX</p>
+        <p style="margin-top: 10px;">
+            <a href="#">אינסטגרם</a> | 
+            <a href="#">פייסבוק</a>
+        </p>
+    </footer>
+    
+    <script>
+        // --- משתנים גלובליים ---
+        const allImages = Array.from(document.querySelectorAll('.gallery-item img'));
+        const lightboxOverlay = document.getElementById('lightboxOverlay');
+        const lightboxImage = document.getElementById('lightboxImage');
+        const header = document.querySelector('header');
+        const bgImages = document.querySelectorAll('.hero-background img');
+        let currentIndex = -1;
+        let isLightboxOpen = false; // דגל למעקב אחרי מצב ה-Lightbox
+
+        // --- 1. Lightbox Logic ---
+
+        function openLightbox(index) {
+            if (index < 0 || index >= allImages.length) return; 
+
+            currentIndex = index;
+            lightboxImage.src = allImages[currentIndex].src.replace('/800/600', '/1600/1200'); 
+            
+            lightboxOverlay.style.display = 'flex';
+            setTimeout(() => {
+                lightboxOverlay.style.opacity = '1';
+                isLightboxOpen = true; 
+            }, 50); 
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeLightbox() {
+            if (!isLightboxOpen) return;
+            
+            lightboxOverlay.style.opacity = '0';
+            setTimeout(() => {
+                lightboxOverlay.style.display = 'none';
+                isLightboxOpen = false; 
+            }, 300);
+            document.body.style.overflow = 'auto'; 
+        }
+
+        function changeImage(direction) {
+            currentIndex += direction;
+            
+            if (currentIndex < 0) {
+                currentIndex = allImages.length - 1;
+            } else if (currentIndex >= allImages.length) {
+                currentIndex = 0;
+            }
+
+            lightboxImage.src = allImages[currentIndex].src.replace('/800/600', '/1600/1200');
+        }
+
+
+        // --- 2. Event Listeners ---
+
+        // סגירת Lightbox בלחיצה על מקש Esc
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && isLightboxOpen) {
+                closeLightbox();
+            }
+        });
+
+        // סגירת Lightbox בלחיצה על הרקע הכהה
+        lightboxOverlay.addEventListener('click', function(e) {
+            if (e.target === lightboxOverlay) { 
+                closeLightbox();
+            }
+        });
+
+
+        // --- 3. Animations and Effects ---
+
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // א. אנימציית טעינה (Fade-in-up) של תמונות הגלריה
+            const galleryItems = document.querySelectorAll('.gallery-item');
+            
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const allItems = Array.from(galleryItems);
+                        const delay = allItems.indexOf(entry.target) % 3; // עיכוב קטן בין שורות
+                        entry.target.style.animationDelay = `${delay * 0.1}s`;
+                        entry.target.classList.add('loaded');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            galleryItems.forEach(item => {
+                observer.observe(item);
+            });
+
+            // ב. החלפת תמונות אוטומטית ב-Hero
+            let currentHeroImage = 0;
+
+            function changeHeroImage() {
+                if (bgImages.length === 0) return;
+                bgImages.forEach(img => img.classList.remove('active'));
+                currentHeroImage = (currentHeroImage + 1) % bgImages.length;
+                bgImages[currentHeroImage].classList.add('active');
+            }
+
+            if (bgImages.length > 1) {
+                bgImages[0].classList.add('active'); 
+                setInterval(changeHeroImage, 6000); 
+            }
+            
+            // ג. שינוי רקע ניווט בעת גלילה (Sticky Header Effect)
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 50) {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 1)';
+                    header.style.boxShadow = '0 5px 15px rgba(0, 0, 0, 0.1)';
+                } else {
+                    header.style.backgroundColor = 'rgba(255, 255, 255, 0.98)';
+                    header.style.boxShadow = '0 1px 5px rgba(0, 0, 0, 0.05)';
+                }
+            });
+            
+        }); // סוף DOMContentLoaded
+    </script>
+
+</body>
+</html>
